@@ -1,0 +1,15 @@
+.main{
+    position:relative;
+    width:100%;
+}
+
+.sidebar{
+    position:absolute;
+   
+}
+
+.content{
+    height:80vh;
+}
+
+
