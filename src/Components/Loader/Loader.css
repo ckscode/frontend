@@ -1,0 +1,25 @@
+.loader{
+    position:fixed;
+    top:0;
+    width:100%;
+    left:0;
+    bottom:0;
+    backdrop-filter: blur(10px);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.loader2{
+    position:absolute;
+    top:0;
+    width:100%;
+    left:0;
+    bottom:0;
+    backdrop-filter: blur(10px);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}

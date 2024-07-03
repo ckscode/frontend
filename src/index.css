@@ -23,8 +23,8 @@
 }
 
 .back{
-    color:black;
     width:25px;
     height:25px;
     margin:5px;
+    z-index:-1;
 }

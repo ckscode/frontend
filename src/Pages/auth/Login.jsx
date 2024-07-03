@@ -53,9 +53,9 @@ const Login = () => {
           <br/>
         </form>
         <div className="mb-3 text-center">
-          <Link className='text-decoration-none' to='/forgot' >Forgot Password?</Link>
+          <Link className='text-decoration-none text-primary' to='/forgot' >Forgot Password?</Link>
           </div>
-          <p className="text-center">Don't have an account? <Link className='text-decoration-none' to='/register'>Register</Link></p>
+          <p className="text-center">Don't have an account? <Link className='text-decoration-none text-primary' to='/register'>Register</Link></p>
           <Link className='text-decoration-none position-absolute fixed-top back' to='/'> <BsArrowLeftCircle className="back"/></Link>
       </AuthContainer>
     </AuthPage>
