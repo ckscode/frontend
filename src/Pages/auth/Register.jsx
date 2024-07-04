@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { registerUser } from '../../Services/authService.jsx';
 import { useDispatch } from 'react-redux';
-import { SET_USER,SET_NAME, SET_LOGIN } from '../../redux/features/auth/authSlice.jsx';
+import { SET_NAME, SET_LOGIN } from '../../redux/features/auth/authSlice.jsx';
 import Loader from '../../Components/Loader/Loader.jsx';
 
 
@@ -60,7 +60,6 @@ const Register = () => {
       try{
         setIsLoading(true)
         const data = await registerUser(values);
-        console.log(data);
         await dispatch(SET_LOGIN(true))
         await dispatch(SET_NAME(data.name))
         setIsLoading(false);
