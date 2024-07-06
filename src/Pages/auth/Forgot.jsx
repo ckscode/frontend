@@ -54,7 +54,7 @@ const Forgot = () => {
             </button>
             <br/>
           </form>
-            <p className="text-center"><Link className='text-decoration-none' to='/login'>Login</Link></p>
+            <p className="text-center"><Link className='text-decoration-none text-primary' to='/login'>Login</Link></p>
             <Link className='text-decoration-none position-absolute fixed-top back' to='/'> <BsArrowLeftCircle className="back"/></Link>
         </AuthContainer>
       </AuthPage>
