@@ -28,3 +28,15 @@
     margin:5px;
     z-index:1;
 }
+
+
+
+.sidebar{
+  position:absolute;
+ 
+}
+
+.content{
+  height:80vh;
+  padding:2% 5%;
+}

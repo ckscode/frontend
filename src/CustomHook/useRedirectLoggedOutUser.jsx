@@ -11,10 +11,10 @@ const useRedirectLoggedOutUser = (path) => {
     const dispatch = useDispatch();
     const loggedIn = useSelector(selectIsLoggedIn)
     const getStatus = async() =>{
-        // const status =await getLoginStatus();
-        // dispatch(SET_LOGIN(status))
-        // console.log(SET_LOGIN)
-        if(!loggedIn){
+        const status =await getLoginStatus();
+        dispatch(SET_LOGIN(status))
+        
+        if(!status){
             toast.info("session expired, please login to continue.")
             navigate(path)
             return

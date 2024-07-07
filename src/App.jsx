@@ -14,6 +14,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getLoginStatus } from './Services/authService'
 import { useDispatch } from 'react-redux'
 import { SET_LOGIN } from './redux/features/auth/authSlice'
+import AddProduct from './Pages/AddProduct/AddProduct'
+import Sidebar from './Components/Sidebar/Sidebar'
+import Layout from './Components/Layout/Layout'
+import Dashboard from './Pages/Dashboard/Dashboard'
 
 axios.defaults.withCredentials = true;
 
@@ -42,7 +46,18 @@ useEffect(()=>{
       <Route path="/login" element={<Login/>}/>
       <Route path="/reset/:resetToken" element={<Reset/>}/>
       <Route path="/forgot" element={<Forgot/>}/>
-      <Route path="/dashboard" element={<Main/>}/>
+      <Route path="/dashboard" element={
+       <Sidebar>
+        <Layout>
+           <Dashboard/>
+        </Layout>
+       </Sidebar>}/>
+      <Route path="/add-product" element={
+          <Sidebar>
+          <Layout>
+            <AddProduct/>
+          </Layout>
+         </Sidebar>}/>
     </Routes>
     </BrowserRouter>
     </div>

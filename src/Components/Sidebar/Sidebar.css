@@ -3,7 +3,7 @@
   }
   main {
     width: 100%;
-    color: #ccc;
+
   }
   .sidebar {
     position: fixed;
@@ -14,8 +14,9 @@
     flex-shrink: 0;
     background-color: var(--color-white);
     overflow: auto;
-    color: var(-color-dark);
+    color: var(--color-dark);
     transition: all 0.5s;
+    box-shadow: var(--box-shadow) ;
   }
   
   .top_section {
