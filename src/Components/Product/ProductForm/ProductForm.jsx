@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { createProduct, selectIsLoading } from '../../redux/features/Product/ProductSlice';
-import Loader from '../Loader/Loader';
+import { createProduct, selectIsLoading } from '../../../redux/features/Product/ProductSlice';
+import Loader from '../../Loader/Loader';
+import { toast } from 'react-toastify';
 
 
 const ProductForm = () => {
@@ -48,26 +49,31 @@ const formik = useFormik({
     },
    ValidationSchema,
    onSubmit:async(values)=>{
-    setProduct(values)
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("sku", generateSKU(values.category));
-    formData.append("category", values.category);
-    formData.append("quantity", Number(values.quantity));
-    formData.append("price", values.price);
-    formData.append("description", values.description);
-    formData.append("image", values.image);
-
-    console.log(formData);
-
-    await dispatch(createProduct(formData))
-
-    navigate("/dashboard")
+    try{
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("sku", generateSKU(values.category));
+      formData.append("category", values.category);
+      formData.append("quantity", Number(values.quantity));
+      formData.append("price", values.price);
+      formData.append("description", values.description);
+      formData.append("image", values.image);
+  
+      console.log(...formData);
+  
+      await dispatch(createProduct(formData))
+  
+      navigate("/dashboard")
+    }catch(error){
+      console.log(error)
+      toast.error(error)
+ }
+  
    }
 })
     return (
         <FormContainer>
-             {isLoading && <Loader/>} 
+             {/* {isLoading && <Loader/>}  */}
             <form onSubmit={formik.handleSubmit}>
             <div className="mb-3">
             <label htmlFor="exampleInputName6" className="form-label">

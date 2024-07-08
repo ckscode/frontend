@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductForm from '../../Components/ProductForm/ProductForm';
+import ProductForm from '../../Components/Product/ProductForm/ProductForm';
 
 
 

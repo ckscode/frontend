@@ -14,7 +14,7 @@ const API_URL = `${BACKEND_URL}/api/products`
 
 //Get All Prodocuts
 const getProducts = async()=>{
-        const response = await axios.get(`${API_URL}/getAll`,formData)
+        const response = await axios.get(`${API_URL}/getAll`)
         return response.data
    };
 
