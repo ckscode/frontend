@@ -50,3 +50,36 @@
     cursor: pointer;
     background-color: rgba(31, 147, 255, 0.3);
 }
+
+.pagination{
+    justify-content: center;
+}
+
+.activePage,.page-num:hover{
+    background-color: var(--light-blue) !important;
+    color:white !important;
+    border-radius:5px;
+}
+
+.page-num{
+    border:1px solid var(--color-dark) ;
+    border-radius:5px;
+    margin:0.5em !important;
+}
+
+.delete{
+    position:fixed;
+    top:0;
+    width:100%;
+    left:0;
+    bottom:0;
+    backdrop-filter: blur(10px);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.deleteModal{
+    background-color: white;
+}

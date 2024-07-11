@@ -18,6 +18,8 @@ import AddProduct from './Pages/AddProduct/AddProduct'
 import Sidebar from './Components/Sidebar/Sidebar'
 import Layout from './Components/Layout/Layout'
 import Dashboard from './Pages/Dashboard/Dashboard'
+import ProductDetail from './Components/Product/ProductDetail/ProductDetail'
+import EditProduct from './Pages/EditProduct/EditProduct'
 
 axios.defaults.withCredentials = true;
 
@@ -56,6 +58,18 @@ useEffect(()=>{
           <Sidebar>
           <Layout>
             <AddProduct/>
+          </Layout>
+         </Sidebar>}/>
+         <Route path="/product-detail/:id" element={
+          <Sidebar>
+          <Layout>
+            <ProductDetail/>
+          </Layout>
+         </Sidebar>}/>
+         <Route path="/edit-product/:id" element={
+          <Sidebar>
+          <Layout>
+            <EditProduct/>
           </Layout>
          </Sidebar>}/>
     </Routes>

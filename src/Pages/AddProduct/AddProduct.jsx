@@ -2,11 +2,7 @@ import React from 'react';
 import ProductForm from '../../Components/Product/ProductForm/ProductForm';
 
 
-
 const AddProduct = () => {
- 
-
-
     return (
         <div>
           
