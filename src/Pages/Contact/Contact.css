@@ -1,0 +1,13 @@
+.contact .card-1 {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+border-radius:10px;
+border:none;
+}
+
+@media screen and (max-width: 700px) {
+    .contact .section {
+        flex-direction: column;
+   }
+}

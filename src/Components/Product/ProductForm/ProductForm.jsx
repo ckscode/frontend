@@ -73,7 +73,7 @@ const formik = useFormik({
 })
     return (
         <FormContainer>
-             {/* {isLoading && <Loader/>}  */}
+             {isLoading && <Loader/>} 
             <form onSubmit={formik.handleSubmit}>
             <div className="mb-3">
             <label htmlFor="exampleInputName6" className="form-label">

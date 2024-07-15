@@ -4,19 +4,40 @@ import useRedirectLoggedOutUser from '../../../CustomHook/useRedirectLoggedOutUs
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProduct, selectProduct } from '../../../redux/features/Product/ProductSlice';
+import { selectIsLoggedIn } from '../../../redux/features/auth/authSlice';
+import Loader from '../../Loader/Loader';
 
 const ProductDetail = () => {
     useRedirectLoggedOutUser('/login')
     const {id} = useParams()
     const dispatch = useDispatch();
-    const product = useSelector(selectProduct);
+    const isLoggedIn = useSelector(selectIsLoggedIn);
+    const {product,isLoading,isError,message} = useSelector((state)=>state.product);
     useEffect(()=>{
-         dispatch(getProduct(id))
-    },[dispatch,id])
-    console.log(product)
+        if(isLoggedIn === true){
+            dispatch(getProduct(id))
+         }
+        
+    
+         if(isError){
+            console.log(message)
+         }
+    },[isLoggedIn,isError,message,dispatch,id])
     return (
         <div>
-          Product detail  
+            {isLoading && <Loader/>} 
+          <h2 className='mt-3'>Product detail </h2>
+          <div className="card w-25 shadow-sm">
+            {product?(<img src={product.data.image.filePath} alt="image"/>):
+            <p>No image for this product</p>}
+            <h4 className='mt-3'>{product&&product.data.quantity>0?<span style={{color:'var(--color-success)'}}>In Stock</span>:<span style={{color:'var(--color-danger)'}}>Out of Stock</span>}</h4>
+          <h3>{product&&product.data.name}</h3>
+          <p><span className='fw-bold'>Category -</span> <span>{product&&product.data.category}</span></p>
+          <p><span className='fw-bold'>Price -</span> <span>{product&&product.data.price}</span></p>
+          <p><span className='fw-bold'>Quantity in Stock :</span> <span>{product&&product.data.quantity}</span></p>
+          <p><span className='fw-bold'>Description -</span> <br/><span>{product&&product.data.description}</span></p>
+          </div>
+          
         </div>
     );
 };

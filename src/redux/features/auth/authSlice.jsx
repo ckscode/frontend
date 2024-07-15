@@ -31,7 +31,7 @@ const authSlice = createSlice({
             const profile = action.payload
             state.user.name= profile.name
             state.user.email= profile.email
-            state.user.phone= profile.phone
+            state.user.contact= profile.contact
             state.user.bio= profile.bio
             state.user.photo= profile.photo
         }

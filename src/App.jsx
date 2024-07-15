@@ -20,6 +20,10 @@ import Layout from './Components/Layout/Layout'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import ProductDetail from './Components/Product/ProductDetail/ProductDetail'
 import EditProduct from './Pages/EditProduct/EditProduct'
+import Profile from './Pages/Profile/Profile'
+import EditProfile from './Pages/Profile/EditProfile'
+import Contact from './Pages/Contact/Contact'
+import ChangePassword from './Pages/ChangePassword/ChangePassword'
 
 axios.defaults.withCredentials = true;
 
@@ -70,6 +74,30 @@ useEffect(()=>{
           <Sidebar>
           <Layout>
             <EditProduct/>
+          </Layout>
+         </Sidebar>}/>
+         <Route path="/profile" element={
+          <Sidebar>
+          <Layout>
+          <Profile/>
+          </Layout>
+         </Sidebar>}/>
+         <Route path="/edit-profile" element={
+          <Sidebar>
+          <Layout>
+          <EditProfile/>
+          </Layout>
+         </Sidebar>}/>
+         <Route path="/contact-us" element={
+          <Sidebar>
+          <Layout>
+          <Contact/>
+          </Layout>
+         </Sidebar>}/>
+         <Route path="/changePassword" element={
+          <Sidebar>
+          <Layout>
+          <ChangePassword/>
           </Layout>
          </Sidebar>}/>
     </Routes>
