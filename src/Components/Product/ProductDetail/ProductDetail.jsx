@@ -28,7 +28,7 @@ const ProductDetail = () => {
             {isLoading && <Loader/>} 
           <h2 className='mt-3'>Product detail </h2>
           <div className="card w-25 shadow-sm">
-            {product?(<img src={product.data.image.filePath} alt="image"/>):
+            {product?.length!==0?(<img src={product.data.image.filePath} alt="image"/>):
             <p>No image for this product</p>}
             <h4 className='mt-3'>{product&&product.data.quantity>0?<span style={{color:'var(--color-success)'}}>In Stock</span>:<span style={{color:'var(--color-danger)'}}>Out of Stock</span>}</h4>
           <h3>{product&&product.data.name}</h3>
