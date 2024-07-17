@@ -5,7 +5,7 @@ import { BiSearch } from "react-icons/bi";
 const Search = ({value,setSearch}) => {
     return (
         <div className="search">
-        <BiSearch size={50} className="icon" />
+        <BiSearch size={45} color="var(--color-primary)" className="icon" />
         <input
           type="text"
           placeholder="Search products"

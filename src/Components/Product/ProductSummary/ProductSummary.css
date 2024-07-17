@@ -11,15 +11,16 @@
     padding: 5px;
     background-color: #f5f6fa;
 }
-.card1 {
+/* .card1 {
     background-color: #b624ff;
 }
 .card2 {
     background-color: #32963d;
-}
+}*/
 .card3 {
-    background-color: #c41849;
-}
-.card4 {
+    border:1px solid var(--color-danger) !important;
+    color:var(--color-danger) !important;
+} 
+/* .card4 {
     background-color: #03a5fc;
-}
+} */

@@ -27,7 +27,7 @@ const Contact = () => {
 
     return (
         <div className='contact'>
-           <h3 className='mt-3'>Contact Us</h3>
+           <h3 >Contact Us</h3>
            <div className="section row">
                 <form onSubmit={sendEmail}>
                     <div className='card-1 col-sm-12 col-lg-6'>

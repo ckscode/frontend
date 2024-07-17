@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import './ProductSummary.css';
-import { AiFillDollarCircle } from "react-icons/ai";
 import { BsCart4, BsCartX } from "react-icons/bs";
 import { BiCategory } from "react-icons/bi";
 import InfoBox from '../../InfoBox/InfoBox';
 import { useDispatch, useSelector } from 'react-redux';
 import {  CALC_CATEGORY, CALC_OUTOFSTOCK, CALC_STORE_VALUE, selectOutOfStock, selectTotalStoreValue, selectUniqueCategory } from '../../../redux/features/Product/ProductSlice';
+import { TbCoinRupeeFilled } from 'react-icons/tb';
 
 
 //Icons
-const earningIcon = <AiFillDollarCircle size={40} color="white" />
-const productIcon = <BsCart4 size={40} color="white" />
-const categoryIcon = <BiCategory size={40} color="white" />
-const outOfStockIcon = <BsCartX size={40} color="white" />
+const earningIcon = <TbCoinRupeeFilled size={40} />
+{/* <AiFillDollarCircle /> */}
+const productIcon = <BsCart4 size={40} />
+const categoryIcon = <BiCategory size={40} />
+const outOfStockIcon = <BsCartX size={40} color="var(--color-danger)" />
 
 const ProductSummary = ({products}) => {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const ProductSummary = ({products}) => {
             <InfoBox
              icon={earningIcon} 
              title={"Total Value"} 
-             count={`${formatNumbers(totalStoreValue.toFixed(2))}`} 
+             count={`₹${formatNumbers(totalStoreValue.toFixed(2))}`} 
              bgColor="card2"/>
 
              

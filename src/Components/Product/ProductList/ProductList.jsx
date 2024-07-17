@@ -28,7 +28,7 @@ const confirmDelete = async(id) =>{
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 5;
+  const itemsPerPage = 7;
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -91,8 +91,8 @@ const confirmDelete = async(id) =>{
                              <td>{shortenText(item.name,25)}</td>
                              <td>{item.category}</td>
                              <td>{item.quantity}</td>
-                             <td>{item.price}</td>
-                             <td>{item.price * item.quantity}</td>
+                             <td>₹{item.price}</td>
+                             <td>₹{item.price * item.quantity}</td>
                              <td className='icons'>
                                 <span>
                                     <AiOutlineEye size={24} onClick={()=>{navigate(`/product-detail/${item._id}`)}}  color={"green"}/>

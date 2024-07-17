@@ -31,10 +31,10 @@ const Profile = () => {
     },[dispatch])
    console.log(profile)
     return (
-        <div>
+        <div className='row'>
             {isLoading && <Loader/>}
                  
-            <div className="card w-50">
+            <div className="card bg-white shadow border-0 rounded-2 col-sm-12 col-md-8 ">
                 <div className='row'>
                 <div className="col-sm-12 col-xl-6">
                 <img className="w-100" src={profile.photo} alt="profile picture"/>

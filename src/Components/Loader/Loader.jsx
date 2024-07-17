@@ -3,7 +3,7 @@ import "./Loader.css"
 const Loader = () => {
     return (
         <div className='loader'>
-             <div className="spinner-border" role="status">
+             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
            </div>
         </div>
@@ -14,7 +14,7 @@ const Loader = () => {
 export const Loader2 = () =>{
     return (
         <div className='loader2'>
-             <div className="spinner-border" role="status">
+             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
            </div>
         </div>

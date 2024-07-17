@@ -72,7 +72,8 @@ const formik = useFormik({
    }
 })
     return (
-        <FormContainer>
+      <div className='row'>
+        <FormContainer className='col-sm-12 col-md-6 col-xl-4'>
              {isLoading && <Loader/>} 
             <form onSubmit={formik.handleSubmit}>
             <div className="mb-3">
@@ -183,7 +184,7 @@ const formik = useFormik({
               placeholder="Product description"
               value={formik.values.description}
               onChange={formik.handleChange}
-            
+              style={{resize:"none"}}
             />
                {formik.touched.description && formik.errors.description ? (
          <label className='error text-danger'><small>{formik.errors.description}</small></label>
@@ -192,7 +193,8 @@ const formik = useFormik({
           </div>
           <button type='submit' disabled={formik.isSubmitting} className='btn btn-success'>Add Product</button>
             </form>
-        </FormContainer>      
+        </FormContainer>  
+        </div>    
     );
 };
 

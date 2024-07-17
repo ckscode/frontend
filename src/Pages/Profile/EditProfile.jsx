@@ -64,7 +64,15 @@ const EditProfile = () => {
                 method:"post",body:image
             });
             const imgData = await response.json()
-            imageUrl = imgData.url.toString()
+            // imageUrl = imgData.url.toString()
+            const getTransformedImageUrl = (url, width, height) => {
+  const parts = url.split('/');
+  parts.splice(6, 0, `w_${width},h_${height},c_fill`); // Add transformations
+  return parts.join('/');
+};
+
+const originalUrl = 'https://res.cloudinary.com/your-cloud-name/image/upload/v1625770649/sample.jpg';
+ imageUrl = getTransformedImageUrl(imgData.url.toString(), 800, 800);
             // console.log(imgData)
             // toast.success("Image Uploaded Successfully")
         }
@@ -89,11 +97,16 @@ const EditProfile = () => {
       };
 
     return (
-        <FormContainer>
+      <div className='row'>
+        <FormContainer className='col-sm-12 col-md-6 col-lg-5 col-xl-4'>
             {isLoading && <Loader/>}
             <div className="w-100">
           <img className="w-100" src={user?.photo} alt="profilepic" />
         </div>
+        <p>
+              <label htmlFor="image" className="form-label">Photo</label>
+              <input type="file" id="image" className="form-control" name="image" onChange={handleImageChange} />
+            </p>
             <form  onSubmit={saveProfile}>
           <span className="profile-data">
             <p>
@@ -136,10 +149,7 @@ const EditProfile = () => {
                 rows="10"
               ></textarea>
             </p>
-            <p>
-              <label htmlFor="image" className="form-label">Photo</label>
-              <input type="file" id="image" className="form-control" name="image" onChange={handleImageChange} />
-            </p>
+            
             <div>
               <button className="btn btn-primary mb-3">Edit Profile</button>
             </div>
@@ -147,6 +157,7 @@ const EditProfile = () => {
         </form>
         <p className="mb-0"><Link to='/changePassword' className='text-primary'>Change Password?</Link></p>
         </FormContainer>
+        </div>
     );
 };
 
