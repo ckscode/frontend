@@ -24,6 +24,16 @@ const ProductForm = () => {
     setDeli(value);
   };
 
+  const getFormattedDate = () => {
+    const date = new Date();
+  
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns month from 0-11
+    const year = date.getFullYear();
+  
+    return `${year}-${month}-${day}`;
+  };
+
   const generateSKU = (category) => {
     const letter = category.slice(0, 3).toUpperCase();
     const code = Date.now();
@@ -40,7 +50,9 @@ const ProductForm = () => {
     name: Yup.string().required("Enter name of product"),
     sku: Yup.string().required("Enter Stock Keeping Unit Number"),
     category: Yup.string().required("Enter Category of the Product"),
-    quantity: Yup.string().matches(/^[0-9]*$/, 'Only non-negative numbers are allowed').required("Add Quantity"),
+    quantity: Yup.string()
+      .matches(/^[0-9]*$/, "Only non-negative numbers are allowed")
+      .required("Add Quantity"),
     price: Yup.string().required("Add Price"),
     description: Yup.string().required("Enter Description of product"),
     image: Yup.mixed().required("File is required"),
@@ -50,7 +62,7 @@ const ProductForm = () => {
     delivered: Yup.boolean().required("Please Give a Delivery Status"),
     deliveryDate: Yup.date().required("Give delivery date"),
   });
-
+ 
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -67,7 +79,7 @@ const ProductForm = () => {
       deliveryDate: "",
     },
     ValidationSchema,
-    onSubmit:async(values) => {
+    onSubmit: async (values) => {
       try {
         const formData = new FormData();
         formData.append("name", values.name);
@@ -82,8 +94,14 @@ const ProductForm = () => {
           "sellerAddress",
           values.sellerAddress + "-" + values.pincode
         );
+      if(formik.values.quantity==0){
+        formData.append("delivered", true);
+        formData.append("deliveryDate", getFormattedDate());
+      }else{
         formData.append("delivered", deli);
         formData.append("deliveryDate", values.deliveryDate);
+      }
+       
 
         console.log(...formData);
         await dispatch(createProduct(formData));
@@ -95,6 +113,7 @@ const ProductForm = () => {
       }
     },
   });
+
   return (
     <div className="row">
       <FormContainer className="col-sm-12 col-md-6 col-xl-4">
@@ -136,6 +155,7 @@ const ProductForm = () => {
               placeholder="Name"
               value={formik.values.name}
               onChange={formik.handleChange}
+              required
             />
             {formik.touched.name && formik.errors.name ? (
               <label className="error text-danger">
@@ -155,6 +175,7 @@ const ProductForm = () => {
               placeholder="category"
               value={formik.values.category}
               onChange={formik.handleChange}
+              required
             />
             {formik.touched.category && formik.errors.category ? (
               <label className="error text-danger">
@@ -175,6 +196,7 @@ const ProductForm = () => {
               value={formik.values.quantity}
               onChange={formik.handleChange}
               min="0"
+              required
             />
             {formik.touched.quantity && formik.errors.quantity ? (
               <label className="error text-danger">
@@ -196,6 +218,7 @@ const ProductForm = () => {
               value={formik.values.price}
               onChange={formik.handleChange}
               min="0"
+              required
             />
             {formik.touched.price && formik.errors.price ? (
               <label className="error text-danger">
@@ -217,6 +240,7 @@ const ProductForm = () => {
               value={formik.values.description}
               onChange={formik.handleChange}
               style={{ resize: "none" }}
+              required
             />
             {formik.touched.description && formik.errors.description ? (
               <label className="error text-danger">
@@ -237,6 +261,7 @@ const ProductForm = () => {
               placeholder="Seller Name"
               value={formik.values.seller}
               onChange={formik.handleChange}
+              required
             />
             {formik.touched.seller && formik.errors.seller ? (
               <label className="error text-danger">
@@ -258,6 +283,7 @@ const ProductForm = () => {
               value={formik.values.sellerAddress}
               onChange={formik.handleChange}
               style={{ resize: "none" }}
+              required
             />
             {formik.touched.sellerAddress && formik.errors.sellerAddress ? (
               <label className="error text-danger">
@@ -278,6 +304,7 @@ const ProductForm = () => {
               placeholder="pincode"
               value={formik.values.pincode}
               onChange={formik.handleChange}
+              required
             />
             {formik.touched.pincode && formik.errors.pincode ? (
               <label className="error text-danger">
@@ -285,8 +312,8 @@ const ProductForm = () => {
               </label>
             ) : null}
           </div>
-
-          <div className="mb-3">
+{formik.values.quantity==0?<div className="mb-1">Product out of Stock</div>:<>
+  <div className="mb-3">
             <label htmlFor="exampleInputName4" className="form-label">
               Delivery Status
             </label>
@@ -296,10 +323,11 @@ const ProductForm = () => {
                 handleDelivery(e.target.value);
               }}
               name="delivered"
-              className="form-select "
+              className={deli?`form-select bg-success text-light`:`form-select bg-warning`}
+              required
             >
-              <option value={false}>Yet to be Delivered</option>
-              <option value={true}>Delivered</option>
+              <option className="bg-light text-dark" value={false}>Yet to be Delivered</option>
+              <option className="bg-light" value={true}>Delivered</option>
             </select>
             {formik.touched.delivered && formik.errors.delivered ? (
               <label className="error text-danger">
@@ -319,6 +347,7 @@ const ProductForm = () => {
                 name="deliveryDate"
                 value={formik.values.deliveryDate}
                 onChange={formik.handleChange}
+                required
               />
               {formik.touched.deliveryDate && formik.errors.deliveryDate ? (
                 <label className="error text-danger">
@@ -326,7 +355,8 @@ const ProductForm = () => {
                 </label>
               ) : null}
             </div>
-          )}
+          )}</>}
+          
 
           <button
             type="submit"

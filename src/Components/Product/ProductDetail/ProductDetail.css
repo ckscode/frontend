@@ -5,7 +5,6 @@
 }
 .product-detail .card {
     width: 100%;
-    max-width: 500px;
     padding: 1rem;
 }
 .product-detail .detail > * {
@@ -24,4 +23,10 @@
 .group {
     border: 1px solid var(--dark-blue);
     padding: 5px;
+}
+
+.edit{
+    font-size: 0.8em;
+    padding: 1% 1%;
+    width:25%;
 }

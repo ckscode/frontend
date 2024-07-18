@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './ProductDetail.css'
 import useRedirectLoggedOutUser from '../../../CustomHook/useRedirectLoggedOutUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getProduct, selectProduct } from '../../../redux/features/Product/ProductSlice';
 import { selectIsLoggedIn } from '../../../redux/features/auth/authSlice';
 import Loader from '../../Loader/Loader';
@@ -11,6 +11,7 @@ const ProductDetail = () => {
     useRedirectLoggedOutUser('/login')
     const {id} = useParams()
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const isLoggedIn = useSelector(selectIsLoggedIn);
     const {product,isLoading,isError,message} = useSelector((state)=>state.product);
     useEffect(()=>{
@@ -23,12 +24,18 @@ const ProductDetail = () => {
             console.log(message)
          }
     },[isLoggedIn,isError,message,dispatch,id])
-
+   
+    const getDate = (e) =>{
+          const arr = e.split('-');
+          const revArr= arr.reverse();
+          const result = revArr.join("-");
+          return result
+    }
     return (
         <div>
             {isLoading && <Loader/>} 
           <h2 className='mt-3 row'>Product detail </h2>
-          <div className="card col-sm-12 col-md-6 col-lg-5 shadow-sm">
+          <div className="card col-sm-12 col-md-9 col-lg-7 col-xl-5 shadow-sm">
             {product!==null&&product.data.image?(<img src={product.data.image.filePath} alt="image"/>):
             <p>No image for this product</p>}
             <h4 className='mt-3'>{product&&product.data.quantity==0?<span style={{color:'var(--color-danger)'}}>Out of Stock</span>:(product&&product.data.delivered?<span style={{color:'var(--color-success)'}}>In Stock</span>:<span style={{color:'var(--color-primary)'}}>Yet To Be Delivered</span>)}</h4>
@@ -39,7 +46,8 @@ const ProductDetail = () => {
           <p><span className='fw-bold'>Description -</span> <br/><span>{product&&product.data.description}</span></p>
           <p><span className='fw-bold'>Seller :</span> <span>{product&&product.data.seller}</span></p>
           <p><span className='fw-bold'>Seller Address -</span> <br/><span>{product&&product.data.sellerAddress}</span></p>
-          
+          <p><span className='fw-bold'>Date of Delivery :</span> <span>{product&&getDate(product.data.deliveryDate)}</span></p>
+          <Link className='btn btn-dark mt-3 edit ' to={`/edit-product/${product&&product.data._id}`}>Edit Product</Link>
           </div>
           
         </div>

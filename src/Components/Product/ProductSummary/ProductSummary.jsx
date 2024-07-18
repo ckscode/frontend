@@ -5,7 +5,7 @@ import { BiCategory } from "react-icons/bi";
 import InfoBox from '../../InfoBox/InfoBox';
 import { useDispatch, useSelector } from 'react-redux';
 import {  CALC_CATEGORY, CALC_OUTOFSTOCK, CALC_STORE_VALUE, CAlC_TODELIVER, selectOutOfStock, selectToBeDelivered, selectTotalStoreValue, selectUniqueCategory } from '../../../redux/features/Product/ProductSlice';
-import { TbCoinRupeeFilled } from 'react-icons/tb';
+import { TbCoinRupeeFilled, TbTruckDelivery } from 'react-icons/tb';
 
 
 //Icons
@@ -13,6 +13,7 @@ const earningIcon = <TbCoinRupeeFilled size={40} />
 {/* <AiFillDollarCircle /> */}
 const productIcon = <BsCart4 size={40} />
 const categoryIcon = <BiCategory size={40} />
+const toBeDeliveredIcon = <TbTruckDelivery size={40} color="var(--color-success)"/>
 const outOfStockIcon = <BsCartX size={40} color="var(--color-danger)" />
 
 const ProductSummary = ({products}) => {
@@ -61,7 +62,7 @@ const ProductSummary = ({products}) => {
 
              
             <InfoBox
-             icon={categoryIcon} 
+             icon={toBeDeliveredIcon} 
              title={"To Be Delivered"} 
              count={toBeDelivered} 
              bgColor="card4"/>

@@ -253,7 +253,8 @@ const formik = useFormik({
               </label>
             ) : null}
           </div>
-
+          {formik.values.quantity==0?<div>Already Delivered</div>:
+          <>
           <div className="mb-3">
             <label htmlFor="exampleInputName5" className="form-label">
               Seller's Address
@@ -319,10 +320,11 @@ const formik = useFormik({
               <small>{formik.errors.deliveryDate}</small>
             </label>
           ) : null}
-        </div>} 
+        </div>} </>}
+          
            
           
-          <button type='submit'  className='btn btn-success'>Edit Product</button>
+          <button type='submit'  className='btn btn-success'>Save Changes</button>
             </form>
         </FormContainer>  
         </div> 
