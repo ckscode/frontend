@@ -108,7 +108,6 @@ const productSlice = createSlice({
     reducers:{
        CALC_STORE_VALUE(state,action){
             const products = action.payload
-            console.log(products)
             const array = []
                 products.map((item)=>{
                     if(item.delivered){
@@ -188,9 +187,8 @@ const productSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false;
-            console.log(action.payload)
+            // console.log(action.payload)
             state.products = action.payload;
-            // toast.success("product added successfully")
         })
         .addCase(getProducts.rejected,(state,action)=>{
             state.isLoading = false;

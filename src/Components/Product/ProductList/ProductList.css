@@ -28,7 +28,17 @@
     vertical-align: top;
     text-align: left;
     padding: 8px;
+    position:relative;
 }
+.noti{
+    position:absolute;
+    font-size:0.5em;
+    padding:1%;
+    border-radius:10px;
+    right:0;
+    top:2px;
+}
+
 .product-list .table table th.icons, .product-list .table table td.icons {
     display: flex;
     justify-content: flex-start;

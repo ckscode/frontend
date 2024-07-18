@@ -90,7 +90,7 @@ const confirmDelete = async(id) =>{
                              <td>{index+1}</td>
                              <td>{shortenText(item.name,25)}</td>
                              <td>{item.category}</td>
-                             <td>{item.quantity}</td>
+                             <td>{item.quantity}{!item.delivered&&<span className='noti bg-primary text-light'>Yet to Deliver</span>}{item.quantity==0&&<span className='noti bg-danger text-light'>Out Of Stock</span>}</td>
                              <td>₹{item.price}</td>
                              <td>₹{item.price * item.quantity}</td>
                              <td className='icons'>
