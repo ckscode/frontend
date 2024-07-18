@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import useRedirectLoggedOutUser from '../../CustomHook/useRedirectLoggedOutUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserProfile } from '../../Services/authService';
-import { selectUser, SET_NAME, SET_USER } from '../../redux/features/auth/authSlice';
+import { getUserProfile, logoutUser } from '../../Services/authService';
+import { selectUser, SET_LOGIN, SET_NAME, SET_USER } from '../../redux/features/auth/authSlice';
 import Loader from '../../Components/Loader/Loader';
 import { AiOutlineConsoleSql } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
@@ -29,6 +29,12 @@ const Profile = () => {
         }
         getUserData()
     },[dispatch])
+
+    const logout = async() =>{
+        await logoutUser();
+        await dispatch(SET_LOGIN(false));
+        navigate('/');
+      }
    console.log(profile)
     return (
         <div className='row'>
@@ -40,15 +46,16 @@ const Profile = () => {
                 <img className="w-100" src={profile.photo} alt="profile picture"/>
                 </div>
                 <div className="col-sm-12 col-xl-6 py-2 h-100">
-                <hr className='my-2 me-2'/>
-                <h5 ><span className='fw-bold'>Name</span> : <span className='fw-light'>{profile.name}</span></h5>
-                <hr className='my-2 me-2'/>
-                <h5 ><span className='fw-bold'>Email</span> : <span className='fw-light'>{profile.email}</span></h5>
-                <hr className='my-2 me-2'/>
-                <h5><span className='fw-bold'>Phone</span> : <span className='fw-light'>{profile.contact?profile.contact:'--'}</span></h5>
-                <hr className='my-2 me-2'/>
-                <h5><span className='fw-bold'>Bio</span> : <span className='fw-light'>{profile.bio?profile.bio:'--'}</span></h5>
-                <button className='btn btn-primary mt-2' onClick={()=>navigate('/edit-profile')}>Edit Profile</button>
+                {/* <hr className='my-2 me-2'/> */}
+                <h5 className='my-3'><span className='fw-bold'>Name</span> : <span className='fw-light'>{profile.name}</span></h5>
+                {/* <hr className='my-2 me-2'/> */}
+                <h5 className='my-3'><span className='fw-bold'>Email</span> : <span className='fw-light'>{profile.email}</span></h5>
+                {/* <hr className='my-2 me-2'/> */}
+                <h5 className='my-3'><span className='fw-bold'>Phone</span> : <span className='fw-light'>{profile.contact?profile.contact:'--'}</span></h5>
+                {/* <hr className='my-2 me-2'/> */}
+                <h5 className='my-3'><span className='fw-bold'>Bio</span> : <span className='fw-light'>{profile.bio?profile.bio:'--'}</span></h5>
+                <button className='btn btn-outline-primary mt-2' onClick={()=>navigate('/edit-profile')}>Edit Profile</button>
+                <button className='btn btn-primary mt-2 ms-3' onClick={()=>logout()}>Logout</button>
                   </div>
                   </div>
           </div>

@@ -38,6 +38,7 @@
       cursor:pointer;
       display:inline;
       font-size: 25px;
+      font-weight:600;
     }
   
   }
@@ -74,7 +75,7 @@
   
   .sidebar-title {
     display: flex;
-    font-size: 1.2em;
+    font-size: 1.3em;
     justify-content: space-between;
     align-items: center;
   }
@@ -105,14 +106,6 @@
     transform: rotate(90deg);
   }
   
-  .sidebar-content {
-    padding-top: 0.25em;
-    height: 0;
-    overflow: hidden;
-  }
-  .sidebar-item.open > .sidebar-content {
-    height: auto;
-  }
   
   .s-child {
     border: 1px solid #ccc;

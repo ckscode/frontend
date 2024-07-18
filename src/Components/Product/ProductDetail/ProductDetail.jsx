@@ -23,7 +23,7 @@ const ProductDetail = () => {
             console.log(message)
          }
     },[isLoggedIn,isError,message,dispatch,id])
-    console.log(product)
+
     return (
         <div>
             {isLoading && <Loader/>} 
@@ -31,12 +31,15 @@ const ProductDetail = () => {
           <div className="card col-sm-12 col-md-6 col-lg-5 shadow-sm">
             {product!==null&&product.data.image?(<img src={product.data.image.filePath} alt="image"/>):
             <p>No image for this product</p>}
-            <h4 className='mt-3'>{product&&product.data.quantity!==0?<span style={{color:'var(--color-success)'}}>In Stock</span>:<span style={{color:'var(--color-danger)'}}>Out of Stock</span>}</h4>
+            <h4 className='mt-3'>{product&&product.data.quantity==0?<span style={{color:'var(--color-danger)'}}>Out of Stock</span>:(product&&product.data.delivered?<span style={{color:'var(--color-success)'}}>In Stock</span>:<span style={{color:'var(--color-primary)'}}>Yet To Be Delivered</span>)}</h4>
           <h3>{product?product.data.name:""}</h3>
           <p><span className='fw-bold'>Category -</span> <span>{product&&product.data.category}</span></p>
           <p><span className='fw-bold'>Price -</span> <span>{product&&product.data.price}</span></p>
           <p><span className='fw-bold'>Quantity in Stock :</span> <span>{product&&product.data.quantity}</span></p>
           <p><span className='fw-bold'>Description -</span> <br/><span>{product&&product.data.description}</span></p>
+          <p><span className='fw-bold'>Seller :</span> <span>{product&&product.data.seller}</span></p>
+          <p><span className='fw-bold'>Seller Address -</span> <br/><span>{product&&product.data.sellerAddress}</span></p>
+          
           </div>
           
         </div>

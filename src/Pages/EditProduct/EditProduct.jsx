@@ -15,8 +15,16 @@ const EditProduct = () => {
     const [data,setData] = useState();
     const productEdit = useSelector(selectProduct);
     const [imagePreview,setImagePreview]=useState(null);
+    const [deli, setDeli] = useState(false);
+    const handleDelivery = (e) => {
+      const value = e === "true" ? true : false;
+      setDeli(value);
+    };
+
+ 
     useEffect(()=>{
         dispatch(getProduct(id));  
+      
     },[dispatch,id])
    
     useEffect(()=>{
@@ -24,17 +32,29 @@ const EditProduct = () => {
             setImagePreview(
                 productEdit && productEdit.data.image ? `${productEdit.data.image.filePath}` : null
               );
+            
              console.log(formik.values.image)
     },[productEdit])
-   
+
+    useEffect(()=>{
+      if(formik.values.delivered){
+        console.log(formik.values.delivered)
+        setDeli(true)
+      }
+    },[id])
 console.log(productEdit)
     const ValidationSchema = Yup.object().shape({
         name:Yup.string().required("Enter name of product"),
         category:Yup.string().required("Enter Category of the Product"),
-        quantity:Yup.string().required("Add Quantity"),
+        quantity:Yup.string().matches(/^[0-9]*$/, 'Only non-negative numbers are allowed').required("Add Quantity"),
         price:Yup.string().required("Add Price"),
         description:Yup.string().required("Enter Description of product"),
         image:Yup.mixed().required("File is required"),
+        seller: Yup.string().required("Seller Name is Required"),
+        sellerAddress: Yup.string().required("Seller Address is Required"),
+        pincode: Yup.string().required("Please provide Seller's Pincode"),
+        delivered: Yup.boolean().required("Please Give a Delivery Status"),
+        deliveryDate: Yup.date().required("Give delivery date"),
     })
     const generateSKU = (category) =>{
         const letter = category.slice(0,3).toUpperCase();
@@ -55,7 +75,12 @@ const formik = useFormik({
         quantity:"",
         price:"",
         description:"",
-        image:""
+        image:"",
+        seller: "",
+        sellerAddress: "",
+        pincode: "",
+        delivered: false,
+        deliveryDate:"",
     },
    ValidationSchema,
    onSubmit:async(values)=>{
@@ -67,7 +92,13 @@ const formik = useFormik({
       formData.append("price", values.price);
       formData.append("description", values.description);
       formData.append("image", values.image);
-  
+      formData.append("seller", values.seller);
+      formData.append(
+        "sellerAddress",
+        values.sellerAddress + "-" + values.pincode
+      );
+      formData.append("delivered", deli);
+      formData.append("deliveryDate", values.deliveryDate);
       console.log(...formData);
   
       await dispatch(updateProduct({id,formData}));
@@ -202,7 +233,96 @@ const formik = useFormik({
         ) : null}
            
           </div>
-          <button type='submit' disabled={formik.isSubmitting} className='btn btn-success'>Edit Product</button>
+
+          <div className="mb-3">
+            <label htmlFor="exampleInputName" className="form-label">
+              Seller
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="exampleInputName"
+              name="seller"
+              placeholder="Seller Name"
+              value={formik.values.seller}
+              onChange={formik.handleChange}
+            />
+            {formik.touched.seller && formik.errors.seller ? (
+              <label className="error text-danger">
+                <small>{formik.errors.seller}</small>
+              </label>
+            ) : null}
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="exampleInputName5" className="form-label">
+              Seller's Address
+            </label>
+            <textarea
+              type="text"
+              className="form-control"
+              id="exampleInputName5"
+              name="sellerAddress"
+              placeholder="Seller's Address"
+              value={formik.values.sellerAddress}
+              onChange={formik.handleChange}
+              style={{ resize: "none" }}
+            />
+            {formik.touched.sellerAddress && formik.errors.sellerAddress ? (
+              <label className="error text-danger">
+                <small>{formik.errors.sellerAddress}</small>
+              </label>
+            ) : null}
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="exampleInputName4" className="form-label">
+              Delivery Status
+            </label>
+            <select
+              onChange={(e) => {
+                formik.handleChange;
+                handleDelivery(e.target.value);
+              }}
+              name="delivered"
+              className="form-select "
+            >{formik.values.delivered?<>
+              <option value={true}>Delivered</option>
+              <option value={false}>Yet to be Delivered</option></>
+            :<>
+               <option value={false}>Yet to be Delivered</option>
+               <option value={true}>Delivered</option></>
+            }
+           
+            </select>
+            {formik.touched.delivered && formik.errors.delivered ? (
+              <label className="error text-danger">
+                <small>{formik.errors.delivered}</small>
+              </label>
+            ) : null}
+          </div>
+         {deli&&
+          <div className="mb-3">
+          <label htmlFor="exampleInputName4" className="form-label">
+            Date of Delivery
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="exampleInputName4"
+            name="deliveryDate"
+            value={formik.values.deliveryDate}
+            onChange={formik.handleChange}
+          />
+          {formik.touched.deliveryDate && formik.errors.deliveryDate ? (
+            <label className="error text-danger">
+              <small>{formik.errors.deliveryDate}</small>
+            </label>
+          ) : null}
+        </div>} 
+           
+          
+          <button type='submit'  className='btn btn-success'>Edit Product</button>
             </form>
         </FormContainer>  
         </div> 

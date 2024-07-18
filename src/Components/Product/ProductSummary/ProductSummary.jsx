@@ -4,7 +4,7 @@ import { BsCart4, BsCartX } from "react-icons/bs";
 import { BiCategory } from "react-icons/bi";
 import InfoBox from '../../InfoBox/InfoBox';
 import { useDispatch, useSelector } from 'react-redux';
-import {  CALC_CATEGORY, CALC_OUTOFSTOCK, CALC_STORE_VALUE, selectOutOfStock, selectTotalStoreValue, selectUniqueCategory } from '../../../redux/features/Product/ProductSlice';
+import {  CALC_CATEGORY, CALC_OUTOFSTOCK, CALC_STORE_VALUE, CAlC_TODELIVER, selectOutOfStock, selectToBeDelivered, selectTotalStoreValue, selectUniqueCategory } from '../../../redux/features/Product/ProductSlice';
 import { TbCoinRupeeFilled } from 'react-icons/tb';
 
 
@@ -20,7 +20,7 @@ const ProductSummary = ({products}) => {
     const totalStoreValue = useSelector(selectTotalStoreValue);
     const outOfStock = useSelector(selectOutOfStock);
     const totalCategory = useSelector(selectUniqueCategory);
-
+    const toBeDelivered = useSelector(selectToBeDelivered);
 
     //format amount
      const formatNumbers = (x) => {
@@ -32,6 +32,7 @@ const ProductSummary = ({products}) => {
             dispatch(CALC_STORE_VALUE(products));
             dispatch(CALC_OUTOFSTOCK(products));
             dispatch(CALC_CATEGORY(products));
+            dispatch(CAlC_TODELIVER(products));
         }  
        
     },[dispatch,products])
@@ -61,8 +62,8 @@ const ProductSummary = ({products}) => {
              
             <InfoBox
              icon={categoryIcon} 
-             title={"Category"} 
-             count={totalCategory.length} 
+             title={"To Be Delivered"} 
+             count={toBeDelivered} 
              bgColor="card4"/>
            </div>
         </div>

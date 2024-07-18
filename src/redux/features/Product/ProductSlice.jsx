@@ -13,6 +13,7 @@ message:"",
 totalStoreValue:0,
 outOfStock:0,
 category:[],
+toBeDelivered:0
 }
 
 //Create New Product
@@ -107,17 +108,22 @@ const productSlice = createSlice({
     reducers:{
        CALC_STORE_VALUE(state,action){
             const products = action.payload
+            console.log(products)
             const array = []
-            products.map((item)=>{
-                const {price,quantity} = item
-                const productValue = price * quantity
-                return array.push(productValue)
-            })
-            const totalValue = array.reduce((a,b)=>{
-                return a + b
-            },0)
-
-            state.totalStoreValue = totalValue;
+                products.map((item)=>{
+                    if(item.delivered){
+                        const {price,quantity} = item
+                        const productValue = price * quantity
+                        return array.push(productValue)
+                    }
+                })
+                const totalValue = array.reduce((a,b)=>{
+                    return a + b
+                },0)
+    
+                state.totalStoreValue = totalValue;
+            
+         
        },
          CALC_OUTOFSTOCK(state,action){
         const products = action.payload
@@ -145,6 +151,16 @@ const productSlice = createSlice({
     
         const uniqueCategory = [...new Set(array)]
         state.category = uniqueCategory;
+    },
+    CAlC_TODELIVER(state,action){
+        const products = action.payload;
+        let count=0;
+        products.forEach((ele)=>{
+           if(!ele.delivered){
+            count +=1
+           }
+        })
+        state.toBeDelivered = count
     }
     },
     extraReducers:(builder)=>{
@@ -156,7 +172,7 @@ const productSlice = createSlice({
             state.isSuccess = true;
             state.isError = false;
             console.log(action.payload)
-            state.products.push(action.payload);
+            // state.products.push(action.payload);
             toast.success("product added successfully")
         })
         .addCase(createProduct.rejected,(state,action)=>{
@@ -232,7 +248,7 @@ const productSlice = createSlice({
     }
 })
 
-export const{CALC_STORE_VALUE,CALC_OUTOFSTOCK,CALC_CATEGORY} = productSlice.actions;
+export const{CALC_STORE_VALUE,CALC_OUTOFSTOCK,CALC_CATEGORY,CAlC_TODELIVER} = productSlice.actions;
 
 export const selectIsLoading = (state) => state.product.isLoading;
 
@@ -243,5 +259,7 @@ export const selectTotalStoreValue = (state) =>state.product.totalStoreValue;
 export const selectOutOfStock = (state) => state.product.outOfStock;
 
 export const selectUniqueCategory = (state) => state.product.category;
+
+export const selectToBeDelivered = (state) => state.product.toBeDelivered;
 
 export default productSlice.reducer;

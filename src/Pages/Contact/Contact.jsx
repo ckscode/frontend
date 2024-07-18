@@ -54,6 +54,7 @@ const Contact = () => {
                         placeholder='message' 
                         value={message}
                         onChange={(e)=>setMessage(e.target.value)} 
+                        style={{resize:"none"}}
                         required>
                         </textarea>
                         <button className='btn btn-primary'>Send Message</button>
