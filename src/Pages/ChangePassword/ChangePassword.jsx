@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { FormContainer } from '../../Components/Product/ProductForm/Form.styled';
 import useRedirectLoggedOutUser from '../../CustomHook/useRedirectLoggedOutUser';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import { changePassword } from '../../Services/authService';
 import Loader from '../../Components/Loader/Loader';
+import { AuthContainer, AuthPage } from '../auth/auth';
 
 const ChangePassword = () => {
     useRedirectLoggedOutUser('/login');
@@ -70,7 +70,8 @@ const ChangePassword = () => {
        })
     return (
         <>
-       <FormContainer>
+            <AuthPage>
+            <AuthContainer>
        <h2 className="mb-4 fw-bold text-center">Change Password</h2>
        {isLoading && <Loader/>}
        <form onSubmit={formik.handleSubmit}>
@@ -121,7 +122,8 @@ const ChangePassword = () => {
             </button>
             <br/>
           </form>
-       </FormContainer>
+          </AuthContainer>
+          </AuthPage>
        </>
     );
 };
