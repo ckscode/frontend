@@ -21,6 +21,15 @@ const EditProduct = () => {
       setDeli(value);
     };
 
+    const getFormattedDate = () => {
+      const date = new Date();
+    
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns month from 0-11
+      const year = date.getFullYear();
+    
+      return `${year}-${month}-${day}`;
+    };
  
     useEffect(()=>{
         dispatch(getProduct(id));  
@@ -33,16 +42,14 @@ const EditProduct = () => {
                 productEdit && productEdit.data.image ? `${productEdit.data.image.filePath}` : null
               );
             
-             console.log(formik.values.image)
     },[productEdit])
 
     useEffect(()=>{
-      if(formik.values.delivered){
-        console.log(formik.values.delivered)
+      if(productEdit&&productEdit.data.delivered){
         setDeli(true)
       }
     },[id])
-console.log(productEdit)
+
     const ValidationSchema = Yup.object().shape({
         name:Yup.string().required("Enter name of product"),
         category:Yup.string().required("Enter Category of the Product"),
@@ -56,12 +63,7 @@ console.log(productEdit)
         delivered: Yup.boolean().required("Please Give a Delivery Status"),
         deliveryDate: Yup.date().required("Give delivery date"),
     })
-    const generateSKU = (category) =>{
-        const letter = category.slice(0,3).toUpperCase();
-        const code = Date.now();
-        const sku = letter + "-" + code;
-        return sku;
-    }
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         formik.setFieldValue('image', file);
@@ -97,9 +99,9 @@ const formik = useFormik({
         "sellerAddress",
         values.sellerAddress + "-" + values.pincode
       );
-      formData.append("delivered", deli);
-      formData.append("deliveryDate", values.deliveryDate);
-      console.log(...formData);
+        formData.append("delivered", deli);
+        formData.append("deliveryDate", values.deliveryDate);
+   
   
       await dispatch(updateProduct({id,formData}));
      await dispatch(getProduct(id))
@@ -112,6 +114,9 @@ const formik = useFormik({
   
    }
 })
+
+
+console.log(deli)
     return (
       <div className="row">
         <h1>Edit Product</h1>
@@ -186,7 +191,7 @@ const formik = useFormik({
               placeholder="quantity"
               value={formik.values.quantity}
               onChange={formik.handleChange}
-            
+              min="0"
             />
                {formik.touched.quantity && formik.errors.quantity ? (
          <label className='error text-danger'><small>{formik.errors.quantity}</small></label>
@@ -206,7 +211,7 @@ const formik = useFormik({
               placeholder="price"
               value={formik.values.price}
               onChange={formik.handleChange}
-            
+               min="0"
             />
                {formik.touched.price && formik.errors.price ? (
          <label className='error text-danger'><small>{formik.errors.price}</small></label>
@@ -314,6 +319,7 @@ const formik = useFormik({
             name="deliveryDate"
             value={formik.values.deliveryDate}
             onChange={formik.handleChange}
+            required
           />
           {formik.touched.deliveryDate && formik.errors.deliveryDate ? (
             <label className="error text-danger">
