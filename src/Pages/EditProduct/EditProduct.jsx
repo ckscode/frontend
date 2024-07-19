@@ -12,7 +12,6 @@ const EditProduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLoading = useSelector(selectIsLoading);
-    const [data,setData] = useState();
     const productEdit = useSelector(selectProduct);
     const [imagePreview,setImagePreview]=useState(null);
     const [deli, setDeli] = useState(false);
@@ -41,14 +40,12 @@ const EditProduct = () => {
             setImagePreview(
                 productEdit && productEdit.data.image ? `${productEdit.data.image.filePath}` : null
               );
+              if(productEdit&&productEdit.data.delivered){
+                setDeli(true)
+              }
             
     },[productEdit])
 
-    useEffect(()=>{
-      if(productEdit&&productEdit.data.delivered){
-        setDeli(true)
-      }
-    },[id])
 
     const ValidationSchema = Yup.object().shape({
         name:Yup.string().required("Enter name of product"),
