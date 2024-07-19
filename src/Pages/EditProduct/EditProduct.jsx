@@ -6,8 +6,10 @@ import { FormContainer, ImagePreview } from '../../Components/Product/ProductFor
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Loader from '../../Components/Loader/Loader';
+import useRedirectLoggedOutUser from '../../CustomHook/useRedirectLoggedOutUser';
 
 const EditProduct = () => {
+  useRedirectLoggedOutUser('/')
     const {id} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();

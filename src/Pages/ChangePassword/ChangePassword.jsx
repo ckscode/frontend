@@ -8,7 +8,7 @@ import Loader from '../../Components/Loader/Loader';
 import { AuthContainer, AuthPage } from '../auth/auth';
 
 const ChangePassword = () => {
-    useRedirectLoggedOutUser('/login');
+    useRedirectLoggedOutUser('/');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 

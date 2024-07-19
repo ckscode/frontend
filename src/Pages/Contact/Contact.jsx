@@ -6,7 +6,7 @@ import useRedirectLoggedOutUser from '../../CustomHook/useRedirectLoggedOutUser'
 
 const BACKEND_URL = process.env.REACT_APP_API_URL;
 const Contact = () => {
-    useRedirectLoggedOutUser('/login')
+    useRedirectLoggedOutUser('/')
     const [subject,setSubject] = useState("");
     const [message,setMessage] = useState("");
     const data = {

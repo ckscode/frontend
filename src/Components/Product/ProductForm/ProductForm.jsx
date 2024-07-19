@@ -12,6 +12,7 @@ import Loader from "../../Loader/Loader";
 import { toast } from "react-toastify";
 
 const ProductForm = () => {
+  
   const [product, setProduct] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const isLoading = useSelector(selectIsLoading);

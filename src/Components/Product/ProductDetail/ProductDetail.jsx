@@ -8,7 +8,7 @@ import { selectIsLoggedIn } from '../../../redux/features/auth/authSlice';
 import Loader from '../../Loader/Loader';
 
 const ProductDetail = () => {
-    useRedirectLoggedOutUser('/login')
+    useRedirectLoggedOutUser('/')
     const {id} = useParams()
     const dispatch = useDispatch();
     const navigate = useNavigate()

@@ -6,8 +6,10 @@ import { FormContainer } from '../../Components/Product/ProductForm/Form.styled'
 import { getUserProfile, UpdateUser } from '../../Services/authService';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
+import useRedirectLoggedOutUser from '../../CustomHook/useRedirectLoggedOutUser';
 
 const EditProfile = () => {
+  useRedirectLoggedOutUser('/login')
     const [isLoading,setIsLoading] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();

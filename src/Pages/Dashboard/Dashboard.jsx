@@ -8,7 +8,7 @@ import ProductList from '../../Components/Product/ProductList/ProductList';
 import ProductSummary from '../../Components/Product/ProductSummary/ProductSummary';
 
 const Dashboard = () => {
-    useRedirectLoggedOutUser('/login')
+    useRedirectLoggedOutUser('/')
     const dispatch = useDispatch();
 
     const isLoggedIn = useSelector(selectIsLoggedIn);
