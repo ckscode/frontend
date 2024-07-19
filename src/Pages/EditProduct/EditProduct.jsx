@@ -94,7 +94,7 @@ const formik = useFormik({
       formData.append("seller", values.seller);
       formData.append(
         "sellerAddress",
-        values.sellerAddress + "-" + values.pincode
+        values.sellerAddress
       );
         formData.append("delivered", deli);
         formData.append("deliveryDate", values.deliveryDate);
