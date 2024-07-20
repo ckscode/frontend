@@ -47,11 +47,11 @@
     font-size: 25px;
     cursor: pointer;
     color: var(--color-white);
-    transition: all 0.3s;
+    
   }
   
   .bars:hover {
-    /* color: var(--color-primary); */
+    color: var(--color-primary);
     font-size: 27px;
   }
   
@@ -70,7 +70,8 @@
   }
   
   .sidebar-item:hover {
-    background-color: #eee;
+    color: var(--color-primary);
+
   }
   
   .sidebar-title {
@@ -129,10 +130,27 @@
     position: relative;
     width: 100%;
     height: auto;
-    background-color: #eee;
+    /* background-color: #eee; */
   }
   
   .active::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background-color: var(--light-blue);
+  }
+
+  .link {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    /* background-color: #eee; */
+  }
+  .link:hover::after {
     content: "";
     position: absolute;
     width: 5px;
