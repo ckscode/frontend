@@ -37,13 +37,13 @@ const Profile = () => {
     navigate("/");
   };
   return (
-    <div className="row">
+    <div className="row ">
       {isLoading && <Loader />}
 
-      <div className="card bg-white shadow border-0 rounded-2 col-sm-12 col-md-8 ">
+      <div className="card bg-white shadow rounded-2 col-sm-12 col-md-8 border-0">
         <div className="row">
           <div className="col-sm-12 col-xl-6">
-            <img className="w-100" src={profile.photo} alt="profile picture" />
+            <img className="w-100 rounded-2" src={profile.photo} alt="profile picture" />
           </div>
           <div className="col-sm-12 col-xl-6 py-2 h-100">
             {/* <hr className='my-2 me-2'/> */}

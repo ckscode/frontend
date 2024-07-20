@@ -9,6 +9,7 @@ import {
 } from "../../../redux/features/Product/ProductSlice";
 import { selectIsLoggedIn } from "../../../redux/features/auth/authSlice";
 import Loader from "../../Loader/Loader";
+import { FormContainer } from "../ProductForm/Form.styled";
 
 const ProductDetail = () => {
   useRedirectLoggedOutUser("/");
@@ -36,9 +37,10 @@ const ProductDetail = () => {
     return result;
   };
   return (
-    <div>
+    <div >
       {isLoading && <Loader />}
-      <h2 className="mt-3 row">Product detail </h2>
+      <h1 className="mt-3 row">Product detail </h1>
+     
       <div className="card col-sm-12 col-md-9 col-lg-7 col-xl-5 shadow-sm">
         {product !== null && product.data.image ? (
           <img src={product.data.image.filePath} alt="image" />
