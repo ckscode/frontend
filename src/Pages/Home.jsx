@@ -67,56 +67,61 @@ const Home = () => {
             <h1 className="text-center">
               Inventory<span className="fw-light">App</span>
             </h1>
-            <p className="text-center">"It is a basic inventory app that can be used to store and track the details of inventory.."</p>
+            <p className="text-center">
+              "It is a basic inventory app that can be used to store and track
+              the details of inventory.."
+            </p>
           </div>
           <div className="col-12 col-md-6 col-lg-5 col-xl-4">
-          <AuthContainer className="w-75 shadow-none home-login">
-            {isLoading && <Loader />}
-          
-            <div className="text-secondary">
-            <h3 className="fw-bold text-dark mb-0">Login </h3>
-            <p className="mb-4"><small>Fill the required details</small></p>
-            </div>
-            <form className="home-form" onSubmit={formik.handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  name="email"
-                  placeholder="email address"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                />
-                {formik.touched.email && formik.errors.email ? (
-                  <label className="error text-danger">
-                    <small>{formik.errors.email}</small>
-                  </label>
-                ) : null}
+            <AuthContainer className="w-75 shadow-none home-login">
+              {isLoading && <Loader />}
+
+              <div className="text-secondary">
+                <h3 className="fw-bold text-dark mb-0">Login </h3>
+                <p className="mb-4">
+                  <small>Fill the required details</small>
+                </p>
               </div>
-              <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  name="password"
-                  placeholder="Password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                />
-                {formik.touched.password && formik.errors.password ? (
-                  <label className="error text-danger">
-                    <small>{formik.errors.password}</small>
+              <form className="home-form" onSubmit={formik.handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
+                    Email
                   </label>
-                ) : null}
-              </div>
-              {/* <div className="mb-3 form-check">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    name="email"
+                    placeholder="email address"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.email && formik.errors.email ? (
+                    <label className="error text-danger">
+                      <small>{formik.errors.email}</small>
+                    </label>
+                  ) : null}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    name="password"
+                    placeholder="Password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.password && formik.errors.password ? (
+                    <label className="error text-danger">
+                      <small>{formik.errors.password}</small>
+                    </label>
+                  ) : null}
+                </div>
+                {/* <div className="mb-3 form-check">
             <input
               type="checkbox"
               className="form-check-input"
@@ -126,36 +131,39 @@ const Home = () => {
               Check me out
             </label>
           </div> */}
-              <button
-                type="submit"
-                disabled={formik.isSubmitting}
-                className="btn btn-primary mb-3 rounded-5 w-100"
-              >
-                Login
-              </button>
-              <br />
-            </form>
-            <div className="home-ques">
-            <div className="mb-3 text-center">
-              <Link className="text-decoration-none text-primary" to="/forgot">
-                Forgot Password?
-              </Link>
-            </div>
-            <p className="text-center">
-              Don't have an account?{" "}
-              <Link
-                className="text-decoration-none text-primary"
-                to="/register"
-              >
-                Register
-              </Link>
-            </p>
-            </div>
-          </AuthContainer>
+                <button
+                  type="submit"
+                  disabled={formik.isSubmitting}
+                  className="btn btn-primary mb-3 rounded-5 w-100"
+                >
+                  Login
+                </button>
+                <br />
+              </form>
+              <div className="home-ques">
+                <div className="mb-3 text-center">
+                  <Link
+                    className="text-decoration-none text-primary"
+                    to="/forgot"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
+                <p className="text-center">
+                  Don't have an account?{" "}
+                  <Link
+                    className="text-decoration-none text-primary"
+                    to="/register"
+                  >
+                    Register
+                  </Link>
+                </p>
+              </div>
+            </AuthContainer>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

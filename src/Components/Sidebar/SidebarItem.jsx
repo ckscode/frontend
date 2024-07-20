@@ -5,9 +5,8 @@ import { NavLink } from "react-router-dom";
 const activeLink = ({ isActive }) => (isActive ? "active" : "link");
 const activeSublink = ({ isActive }) => (isActive ? "active" : "link");
 
-
 const SidebarItem = ({ item, isOpen }) => {
-   const [expandMenu, setExpandMenu] = useState(false);
+  const [expandMenu, setExpandMenu] = useState(false);
 
   if (item.childrens) {
     return (

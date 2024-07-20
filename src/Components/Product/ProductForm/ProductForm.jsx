@@ -12,8 +12,6 @@ import Loader from "../../Loader/Loader";
 import { toast } from "react-toastify";
 
 const ProductForm = () => {
-  
-  const [product, setProduct] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
@@ -27,11 +25,11 @@ const ProductForm = () => {
 
   const getFormattedDate = () => {
     const date = new Date();
-  
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns month from 0-11
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth() returns month from 0-11
     const year = date.getFullYear();
-  
+
     return `${year}-${month}-${day}`;
   };
 
@@ -63,7 +61,7 @@ const ProductForm = () => {
     delivered: Yup.boolean().required("Please Give a Delivery Status"),
     deliveryDate: Yup.date().required("Give delivery date"),
   });
- 
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -95,16 +93,14 @@ const ProductForm = () => {
           "sellerAddress",
           values.sellerAddress + "-" + values.pincode
         );
-      if(formik.values.quantity==0){
-        formData.append("delivered", true);
-        formData.append("deliveryDate", getFormattedDate());
-      }else{
-        formData.append("delivered", deli);
-        formData.append("deliveryDate", values.deliveryDate);
-      }
-       
+        if (formik.values.quantity == 0) {
+          formData.append("delivered", true);
+          formData.append("deliveryDate", getFormattedDate());
+        } else {
+          formData.append("delivered", deli);
+          formData.append("deliveryDate", values.deliveryDate);
+        }
 
-        console.log(...formData);
         await dispatch(createProduct(formData));
 
         navigate("/dashboard");
@@ -313,51 +309,63 @@ const ProductForm = () => {
               </label>
             ) : null}
           </div>
-{formik.values.quantity==0?<div className="mb-1">Product out of Stock</div>:<>
-  <div className="mb-3">
-            <label htmlFor="exampleInputName4" className="form-label">
-              Delivery Status
-            </label>
-            <select
-              onChange={(e) => {
-                formik.handleChange;
-                handleDelivery(e.target.value);
-              }}
-              name="delivered"
-              className={deli?`form-select bg-success text-light`:`form-select bg-warning`}
-              required
-            >
-              <option className="bg-light text-dark" value={false}>Yet to be Delivered</option>
-              <option className="bg-light" value={true}>Delivered</option>
-            </select>
-            {formik.touched.delivered && formik.errors.delivered ? (
-              <label className="error text-danger">
-                <small>{formik.errors.delivered}</small>
-              </label>
-            ) : null}
-          </div>
-          {deli && (
-            <div className="mb-3">
-              <label htmlFor="exampleInputName4" className="form-label">
-                Date of Delivery
-              </label>
-              <input
-                type="date"
-                className="form-control"
-                id="exampleInputName4"
-                name="deliveryDate"
-                value={formik.values.deliveryDate}
-                onChange={formik.handleChange}
-                required
-              />
-              {formik.touched.deliveryDate && formik.errors.deliveryDate ? (
-                <label className="error text-danger">
-                  <small>{formik.errors.deliveryDate}</small>
+          {formik.values.quantity == 0 ? (
+            <div className="mb-1">Product out of Stock</div>
+          ) : (
+            <>
+              <div className="mb-3">
+                <label htmlFor="exampleInputName4" className="form-label">
+                  Delivery Status
                 </label>
-              ) : null}
-            </div>
-          )}</>}
-          
+                <select
+                  onChange={(e) => {
+                    formik.handleChange;
+                    handleDelivery(e.target.value);
+                  }}
+                  name="delivered"
+                  className={
+                    deli
+                      ? `form-select bg-success text-light`
+                      : `form-select bg-warning`
+                  }
+                  required
+                >
+                  <option className="bg-light text-dark" value={false}>
+                    Yet to be Delivered
+                  </option>
+                  <option className="bg-light" value={true}>
+                    Delivered
+                  </option>
+                </select>
+                {formik.touched.delivered && formik.errors.delivered ? (
+                  <label className="error text-danger">
+                    <small>{formik.errors.delivered}</small>
+                  </label>
+                ) : null}
+              </div>
+              {deli && (
+                <div className="mb-3">
+                  <label htmlFor="exampleInputName4" className="form-label">
+                    Date of Delivery
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="exampleInputName4"
+                    name="deliveryDate"
+                    value={formik.values.deliveryDate}
+                    onChange={formik.handleChange}
+                    required
+                  />
+                  {formik.touched.deliveryDate && formik.errors.deliveryDate ? (
+                    <label className="error text-danger">
+                      <small>{formik.errors.deliveryDate}</small>
+                    </label>
+                  ) : null}
+                </div>
+              )}
+            </>
+          )}
 
           <button
             type="submit"
