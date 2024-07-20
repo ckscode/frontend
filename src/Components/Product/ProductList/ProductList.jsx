@@ -67,7 +67,6 @@ const ProductList = ({ products, isLoading }) => {
       <div className="table">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="mb-0">Inventory</h2>
-
           <Search value={search} setSearch={setSearch} />
         </div>
         {isLoading && <Loader2 />}
@@ -112,25 +111,25 @@ const ProductList = ({ products, isLoading }) => {
                       <td className="icons">
                         <span>
                           <AiOutlineEye
-                            size={24}
+                            size={23}
                             onClick={() => {
                               navigate(`/product-detail/${item._id}`);
                             }}
-                            color={"green"}
+                            color={"var(--color-primary)"}
                           />
                         </span>
                         <span>
                           <FaEdit
-                            size={20}
+                            size={19}
                             onClick={() => {
                               navigate(`/edit-product/${item._id}`);
                             }}
-                            color={"var(--light-blue)"}
+                            color={"var(--color-primary)"}
                           />
                         </span>
                         <span>
                           <FaTrashAlt
-                            size={20}
+                            size={17}
                             onClick={() => {
                               setDeleteId(item._id);
                               setDel(true);

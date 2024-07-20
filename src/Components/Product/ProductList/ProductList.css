@@ -15,14 +15,16 @@
 .product-list .table table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 .product-list .table table thead {
-    border-top: 2px solid var(--light-blue);
-    border-bottom: 2px solid var(--light-blue);
+    border-top: 2px solid var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
 }
 .product-list .table table th {
     border: 1px solid #eee;
+    font-weight:600;
+    color:var(--color-dark)
 }
 .product-list .table table th, .product-list .table table td {
     vertical-align: top;
